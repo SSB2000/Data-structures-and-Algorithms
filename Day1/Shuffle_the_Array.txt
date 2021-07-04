@@ -1,0 +1,20 @@
+//Leetcode Question 1470. Shuffle the Array
+
+//cpp brute force method
+/*
+vector<int> shuffle(vector<int>& nums, int n) {
+	vector<int> result;
+	int j = n;
+	int i = 0;
+	for(i; i < n; i++) {
+		result.push_back(nums[i]);
+		result.push_back(nums[j]);
+		j++;
+	}
+	return result;
+}
+*/
+
+
+
+//Javascript brute force method
