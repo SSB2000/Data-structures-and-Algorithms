@@ -1,0 +1,20 @@
+832. Flipping an Image
+
+
+Cpp brute force.
+
+vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image) {
+	int lengthR = image.size();
+	int lengthC = image[0].size();
+	int i, j;
+	for(i = 0; i < lengthR; i++) {
+		reverse(image[i].begin(), image[i].end());
+		for(j = 0; j < lengthC; j++) {
+			image[i][j] = 1 - image[i][j];
+		}
+	}
+	return image;
+}
+
+
+JavaScript brute force
