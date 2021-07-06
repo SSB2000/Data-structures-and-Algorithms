@@ -1,0 +1,32 @@
+1380. Lucky Numbers in a Matrix
+
+
+Cpp
+
+vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+  int row = matrix.size();
+  int col = matrix[0].size();
+  int i, j;
+  vector<int> res;
+  for(i = 0; i < row; i++) {
+    int rMin = INT_MAX;
+    int t = 0;
+    for(j = 0; j < col; j++) {
+      if(matrix[i][j] < rMin) {
+        rMin = matrix[i][j];
+        t = j;
+      }    
+    }
+    int r = i;
+    int cMax = matrix[r][t];
+    for(int i = 0; i < row; i++) {
+      cMax = max(matrix[i][t], cMax);
+    }
+    if(cMax == matrix[r][t]) {
+      res.push_back(cMax);
+      break;
+    }
+  }
+  
+  return res;
+}
