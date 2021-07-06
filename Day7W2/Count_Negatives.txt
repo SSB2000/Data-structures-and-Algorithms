@@ -1,0 +1,23 @@
+1351. Count Negative Numbers in a Sorted Matrix
+
+
+Cpp brute force
+
+int countNegatives(vector<vector<int>>& grid) {
+	int res = 0;
+	int i, j;
+	int row = grid.size();
+	int col = grid[0].size();
+	for(j = 0; j < col; j++) {
+		for(i = 0; i < row; i++) {
+			if(grid[i][j] < 0) {
+				if((j - 1 >= 0) && grid[i][j - 1] >= 0) {
+					res += col - j;   
+				}
+				else if(j == 0) res += col - j;
+			}
+		}
+	}
+
+	return res;
+}
