@@ -1,0 +1,22 @@
+1886. Determine Whether Matrix Can Be Obtained By Rotation
+
+
+Cpp:
+
+void rotate(vector<vector<int>>& mat) {
+	int len = mat.size(), i, j;
+	for(int i=0;i<len;i++)
+		for(int j=0;j<i;j++)
+			swap(mat[i][j],mat[j][i]);
+	for(i = 0; i < len; i++) reverse(mat[i].begin(), mat[i].end());
+}
+
+bool findRotation(vector<vector<int>>& mat, vector<vector<int>>& target) {
+	int len = mat.size();
+	int k = 4;
+	while(k-- > 0) {
+		rotate(mat);
+		if(mat == target) return true;
+	}
+	return false;
+}
