@@ -1,0 +1,26 @@
+1556. Thousand Separator
+
+Given an integer n, add a dot (".") as the thousands separator and return it in string format.
+
+Input: n = 987
+Output: "987"
+
+********************************************************************************
+
+
+Cpp
+
+string thousandSeparator(int n) {
+	string res = "";
+	int i = 1;
+	if(n == 0) res = "0";
+	while(n) {
+		if(i++ % 4 == 0) res = "." + res;
+		else {
+			res = static_cast<char>((n % 10) + 48) + res;
+			n = n/10;
+		}
+	}
+	
+	return res;
+}
