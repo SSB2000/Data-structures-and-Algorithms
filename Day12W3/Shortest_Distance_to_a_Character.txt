@@ -1,0 +1,33 @@
+821. Shortest Distance to a Character
+
+Given a string s and a character c that occurs in s, return an array of integers answer where answer.length == s.length and answer[i] is the distance from index i to the closest occurrence of character c in s.
+
+The distance between two indices i and j is abs(i - j), where abs is the absolute value function.
+
+Input: s = "loveleetcode", c = "e"
+Output: [3,2,1,0,1,0,0,1,2,2,1,0]
+********************************************************************************
+
+
+Cpp
+
+vector<int> shortestToChar(string s, char c) {
+	vector<int> freq;
+	vector<int> res;
+	for(int i = 0; i < s.length(); i++) {
+		if(s[i] == c) freq.push_back(i);
+	}
+	for(int i = 0; i < s.length(); i++) {
+		int min = abs(freq[0] - i);
+		int t = 1;
+		while(t < freq.size()) {
+			int diff = abs(freq[t] - i);
+			if(diff < min) min = diff;
+			else break;
+			t++;
+		}
+		res.push_back(min);
+	}
+	
+	return res;
+}
