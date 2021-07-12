@@ -1,0 +1,60 @@
+1507. Reformat Date
+
+Given a date string in the form Day Month Year, where:
+
+    Day is in the set {"1st", "2nd", "3rd", "4th", ..., "30th", "31st"}.
+    Month is in the set {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}.
+    Year is in the range [1900, 2100].
+
+Convert the date string to the format YYYY-MM-DD, where:
+
+    YYYY denotes the 4 digit year.
+    MM denotes the 2 digit month.
+    DD denotes the 2 digit day.
+
+Input: date = "20th Oct 2052"
+Output: "2052-10-20"
+
+********************************************************************************
+
+
+Cpp
+
+string getDay(string d) {
+	d.erase(d.length() - 2, d.length() - 1);
+	if(d.length() == 1) d = "0" + d;
+	return d;
+}
+
+string getMonth(string m) {
+	string res = "";
+	if(m == "Jan") res = "01";
+	else if(m == "Feb") res = "02";
+	else if(m == "Mar") res = "03";
+	else if(m == "Apr") res = "04";
+	else if(m == "May") res = "05";
+	else if(m == "Jun") res = "06";
+	else if(m == "Jul") res = "07";
+	else if(m == "Aug") res = "08";
+	else if(m == "Sep") res = "09";
+	else if(m == "Oct") res = "10";
+	else if(m == "Nov") res = "11";
+	else if(m == "Dec") res = "12";
+	
+	return res;
+}
+
+string reformatDate(string date) {
+	stringstream s(date);
+	string res = "";
+	string word = "";
+	int f1 = 0;
+	int f2 = 0;
+	while(s >> word) {
+		if(f1++ == 0) res = getDay(word);
+		else if(f2++ == 0) res = getMonth(word) + '-' + res;
+		else res = word + '-' + res;
+	}
+	
+	return res;
+}
