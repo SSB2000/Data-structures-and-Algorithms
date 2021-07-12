@@ -1,0 +1,33 @@
+819. Most Common Word
+
+Given a string paragraph and a string array of the banned words banned, return the most frequent word that is not banned. It is guaranteed there is at least one word that is not banned, and that the answer is unique.
+
+The words in paragraph are case-insensitive and the answer should be returned in lowercase.
+******************************************************************************
+
+Cpp
+
+string mostCommonWord(string p, vector<string>& banned) {
+    unordered_set<string> ban(banned.begin(), banned.end());
+    unordered_map<string, int> res;
+    string word;
+    for(int i = 0; i < p.size(); i++) {
+        p[i] = isalpha(p[i]) ? tolower(p[i]) : ' ';
+    }
+    stringstream s(p);
+    while(s >> word) {
+        if(!ban.count(word)) {
+            res[word]++;
+        }
+    }
+    int freq = INT_MIN;
+    word = "";
+    for(auto i : res) {
+        if(i.second > freq) {
+            freq = i.second;
+            word = i.first;
+        }
+    }
+    
+    return word;
+}
