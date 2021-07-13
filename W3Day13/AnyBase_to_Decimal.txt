@@ -1,0 +1,29 @@
+#include <iostream>
+#include <iostream>
+#include <algorithm>
+#include <math.h>
+#define deb(x) cout << #x << ' ' << x << endl;
+using namespace std;
+
+int getNumber(const char& n) {
+  int res{};
+  if(n >= '0' && n <= '9') return (n - '0');
+  else if(n >= 'A' && n <= 'Z') return (n - 'A' + 10);
+  
+  return res;
+}
+
+int getDecimal(string& n, int& b) {
+  reverse(n.begin(), n.end());
+  int res = 0;
+  for(int i = 0; i < n.length(); ++i) res += (getNumber(n[i]) * pow(b, i));
+  return res;
+}
+
+int main() {
+  string n = "0B";
+  int b = 16;
+  cout << getDecimal(n, b) << endl;
+  
+  return 0;
+}
