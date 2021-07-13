@@ -1,0 +1,50 @@
+136. Single Number
+
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+Input: nums = [2,2,1]
+Output: 1
+
+// Frequency of elements in the list by using map.
+int singleNumber(vector<int>& nums) {
+	map<int, int> freq;
+	for(int i : nums) {
+		if(freq.find(i) == freq.end()) freq[i] = 1;
+		else ++freq[i];
+	}
+	int res{};
+	for(auto& it : freq) {
+		if(it.second == 1) {
+			res = it.first;
+			break;
+		} 
+	}
+	
+	return res;
+}
+
+// Bit Manipulation Method.
+int singleNumber(vector<int>& nums) {
+	int sum = 0, i, len = nums.size();
+	for(i = 0; i < len; i++) {
+		sum ^= nums[i];
+	}
+	return sum;
+}
+
+// Sorting Method.
+int singleNumber(vector<int>& nums) {
+	int res{};
+	if(nums.size() == 1) return nums[0];
+	sort(nums.begin(), nums.end());
+	for(int i = 0; i < nums.size(); i += 2) {
+		if(nums[i] != nums[i + 1]) {
+			res = nums[i];
+			break;
+		}
+	}
+	
+	return res;
+}
