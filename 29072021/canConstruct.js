@@ -32,6 +32,6 @@ console.log(
         "eee",
         "eeee",
         "eeeeee",
-        "eeeeeeee",
+        "eeeeeeee"
     ])
 );
