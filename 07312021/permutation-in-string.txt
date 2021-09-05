@@ -1,0 +1,46 @@
+567. Permutation in String
+
+Given two strings s1 and s2, return true if s2 contains the permutation of s1.
+In other words, one of s1's permutations is the substring of s2.
+
+
+
+Cpp
+
+bool isPermutation(string s1, string subS2) {
+        
+	// Brute
+	map<char, int> freq;
+	for(int i = 0; i < s1.length(); i++) {
+		freq[s1[i]]++;
+	}
+	for(int i = 0; i < subS2.length(); i++) {
+		freq[subS2[i]]--;
+	}
+	for(auto &it : freq) {
+		if(it.second != 0) return false;
+	}
+	return true;
+}
+
+bool binarySearch(const string& s1,const char& ch, int start, int end) {
+	int mid = (start + end)/2;
+	if(s1[mid] == ch) return true;
+	else if (ch < s1[mid]) return binarySearch(s1, ch, start, mid);
+	else return binarySearch(s1, ch, mid + 1, end);
+}
+
+bool inS1(const string& s1,const char& ch) {
+	return binarySearch(s1, ch, 0, s1.length() - 1);
+}
+
+bool checkInclusion(string s1, string s2) {
+	sort(s1.begin(), s1.end());
+	int s1len = s1.length();
+	for(int i = 0; i < s2.length(); i++) {
+		// if(!inS1(s1, s2[i])) continue;
+		if(isPermutation(s1, s2.substr(i, s1len)))
+			return true;
+	}
+	return false;
+}

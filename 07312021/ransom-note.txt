@@ -1,0 +1,31 @@
+383. Ransom Note
+
+Given two stings ransomNote and magazine, return true if ransomNote can be constructed from magazine and false otherwise.
+Each letter in magazine can only be used once in ransomNote.
+
+Cpp
+
+bool canConstruct(string ransomNote, string magazine) {
+	
+	
+	// hash table
+	map<char, int> freq;
+	for(char c : ransomNote) freq[c]++;
+	for(char c : magazine) {
+		if(freq.find(c) != freq.end()) freq[c]--;
+	}
+	for(auto &it : freq) if(it.second > 0) return false;
+	return true;
+	
+	
+	
+	// Character count array
+	
+	/*
+	int arr[26]{};
+	for(char c : ransomNote) arr[c - 'a']++;
+	for(char c : magazine) if(arr[c - 'a']) arr[c - 'a']--;
+	for(int i : arr) if(i) return false;
+	return true;
+	*/
+}

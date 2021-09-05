@@ -1,0 +1,46 @@
+349. Intersection of Two Arrays
+
+
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+
+
+Cpp
+
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+	vector<int> res;
+	
+	// Hash table
+	map<int, int> memo;
+	for(int i = 0; i < nums2.size(); i++) {
+		memo[nums2[i]] = 0;
+	}
+	set<int> ans;
+	for(int i = 0; i < nums1.size(); i++) {
+		if(memo.find(nums1[i]) != memo.end()) ans.insert(nums1[i]);
+	}
+	for(auto it : ans) {
+		res.push_back(it);
+	}
+	
+	return res;
+}
+
+
+
+JavaScript
+
+var intersection = function(nums1, nums2) {
+    let memo = {};
+    for(let i = 0; i < nums2.length; i++) {
+        memo[nums2[i]]++;
+    }
+
+    let ans = new Set();
+    for(let i = 0; i < nums1.length; i++) {
+        if(nums1[i] in memo)
+            ans.add(nums1[i]);  
+    }
+    console.log(ans);
+    let res = [...ans];
+    return res;
+};
